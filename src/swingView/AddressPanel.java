@@ -1,0 +1,124 @@
+package swingView;
+
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import dto.DeviceAddress;
+import dto.DeviceData;
+import exception.IllegalDeviceAddrException;
+import servise.InstructionQueen;
+import servise.SerialService;
+import swingView.define.ButterLabel;
+
+public class AddressPanel extends JPanel {
+	
+	static JComboBox addrCombox = null;
+	
+	static LightBtn statusBtn = new LightBtn(Color.LIGHT_GRAY, 20);
+	static JLabel statusText = new ButterLabel("未连通");
+
+	public AddressPanel() {
+		setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
+		setOpaque(false);
+		setForeground(Color.white);
+
+		String[] ports = SerialService.getPorts();
+
+		if (ports == null || ports.length == 0) {
+			JLabel warningLabel = new JLabel("<请将设备连接本机端口！>");
+			warningLabel.setFont(new Font("Dialog", 1, 18));
+			warningLabel.setForeground(Color.red);
+			add(warningLabel);
+		}else{
+			JLabel portLabel = new ButterLabel("端口");
+			add(portLabel);
+			SerialService.setPort(ports[0]);
+			if(ports.length == 1){
+				portLabel.setText("端口："+ports[0]);
+			}else{
+				JComboBox portComboBox = new JComboBox(ports);				
+				portComboBox.addItemListener(new PortComboxItemListener());
+				add(portComboBox);
+			}
+			JLabel label = new ButterLabel("请选择设备地址:");
+			add(label);
+			
+			addrCombox = new JComboBox();
+			addrCombox.addItemListener(new AddressComboxItemListener());
+			
+			DeviceData.refreshAllAddress();
+			add(addrCombox);
+		}
+		
+		add(statusBtn);
+		add(statusText);
+	}
+	
+	public static void linkOn() {
+		statusBtn.setBackground(new Color(30,144,255));
+		statusText.setText("通讯正常");
+	}
+
+	public static void linkOff() {
+		statusBtn.lightOff();
+		statusText.setText("未连通");
+	}
+
+	
+	public static void refreshAddrCombox(){
+		
+		if(addrCombox != null){
+			//更新下拉元素
+			addrCombox.removeAllItems();		
+			DeviceAddress[] addrs= DeviceData.getAllDeviceAdress();
+			for(int i=0;i<addrs.length;i++){
+				addrCombox.addItem(addrs[i]);
+			}
+		}
+	}
+}
+
+class PortComboxItemListener implements ItemListener {
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		
+		int state = e.getStateChange();
+
+		if (state == ItemEvent.SELECTED) {
+
+			String portName = (String) e.getItem();
+
+			SerialService.setPort(portName);
+
+		}
+
+	}
+};
+
+class AddressComboxItemListener implements ItemListener {
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		int state = e.getStateChange();
+		if (state == ItemEvent.SELECTED) {
+			DeviceAddress addr = (DeviceAddress) e.getItem();
+			try {
+				DeviceData.linkOff();
+				DeviceData.setSelectedDeviceAddr(addr.realAddr);
+
+			} catch (IllegalDeviceAddrException e1) {
+				e1.printStackTrace();
+			}
+
+		}
+
+	}
+};
