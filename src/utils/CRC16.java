@@ -1,17 +1,17 @@
 package utils;
 
 
-
 /**
- * 寰幆鍐椾綑妫�獙锛欳RC-16-CCITT鏌ヨ〃娉�
+ * 
+ * @Description 
+ * 版权所有：昌运电器公司
+ * 未经本公司许可，不得以任何方式复制或者使用本程序任何部分
+ * @author 粟
+ * @date 2016年6月20日 上午11:47:58 
+ * @version V1.0.0
  */
 public final class CRC16 {
 
-    /**
-     * 璁＄畻琛ョ爜
-     * @param org
-     * @return
-     */
     private static byte getComplement( int org ){
         if(org>128){
             return (byte) (org-256);
@@ -19,12 +19,6 @@ public final class CRC16 {
         return (byte) (org);
     }
 
-    /**
-     *  澧炲姞CRC鏍￠獙浣�
-     *  鏈�悗涓や釜瀛楄妭鍒嗗埆鏀�CRC浣庝綅鍜孋RC楂樹綅
-     * @param bytes
-     * @return
-     */
     public static byte[] addCRCChecker(byte[] bytes){
         short crcResult= GetCrc16(bytes);
         byte low = getComplement(crcResult & 0xff);
@@ -41,19 +35,7 @@ public final class CRC16 {
 
         return result;
     }
-    public static void main(String[] args) {
-        short result=CRC16.GetCrc16(new byte[]{4,4,0,0,0,3});
-        System.out.println(result & 0xff);
-        System.out.println(result>>8);
-        System.out.println(Integer.toHexString(result));
-    }
-    /**
-     * 璁＄畻缁欏畾闀垮害鏁版嵁鐨�6浣岰RC
-     * 
-     * @param data
-     *            瑕佽绠桟RC鐨勫瓧鑺傛暟缁�
-     * @return CRC鍊�
-     */
+   
     public static short GetCrc16(byte[] data) { // 鍒濆鍖�
         int High = 0xFF; // 楂樺瓧鑺�
         int Low = 0xFF; // 浣庡瓧鑺�
@@ -77,7 +59,7 @@ public final class CRC16 {
 
 
     /**
-     * CRC16鏌ユ壘琛ㄩ珮瀛楄妭
+     * CRC16-high
      */
     private static final int[] CRC16TABLE_HI ={
     		0x00, 0xC1, 0x81, 0x40, 0x01, 0xC0, 0x80, 0x41, 0x01, 0xC0, 0x80, 0x41, 0x00, 0xC1, 0x81, 0x40,
@@ -99,7 +81,7 @@ public final class CRC16 {
     	};
 
     /**
-     * CRC16鏌ユ壘琛ㄤ綆瀛楄妭
+     * CRC16-low
      */
     private static final int[] CRC16TABLE_LO = {
     		0x00, 0xC0, 0xC1, 0x01, 0xC3, 0x03, 0x02, 0xC2, 0xC6, 0x06, 0x07, 0xC7, 0x05, 0xC5, 0xC4, 0x04, 

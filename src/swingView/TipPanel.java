@@ -2,31 +2,27 @@ package swingView;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import dto.DeviceAddress;
-import dto.DeviceData;
-import exception.IllegalDeviceAddrException;
-import servise.SerialService;
 import staticVal.PropKey;
 import utils.ButterProperties;
-
+/**
+ * 
+ * @Description 
+ * 版权所有：昌运电器公司
+ * 未经本公司许可，不得以任何方式复制或者使用本程序任何部分
+ * @author 粟
+ * @date 2016年6月20日 上午11:46:25 
+ * @version V1.0.0
+ */
 public class TipPanel extends JPanel {
 
 	static JLabel label = new JLabel("欢迎进入水泵控制桌面");
@@ -37,8 +33,9 @@ public class TipPanel extends JPanel {
 		setOpaque(false);
 		
 		JPanel p1 = new JPanel();
-		label.setFont(new Font("Dialog", 1, 24));
-		label.setForeground(Color.white);
+		label.setFont(new Font(Font.DIALOG, 1, 24));
+		Color color = new Color(240,255,255);
+		label.setForeground(color);
 		
 		p1.add(label);
 		p1.setOpaque(false);
@@ -50,24 +47,9 @@ public class TipPanel extends JPanel {
 		JButton jb = new JButton();
 		
 		jb.addActionListener(new ShowInitialSettingFrame());
-		
-//		jb.setBounds(20, 20, 20, 20);
 		jb.setIcon(imageIcon);
-//		jb.setRolloverIcon(imageIcon);
-//		jb.setBorderPainted( false );
-
-//		jb.setFocusPainted( false );
-
 		jb.setContentAreaFilled( false );
-
-//		jb.setFocusable( true );
-
-//		jb.setMargin( new Insets(0, 0, 0, 0));
-//		add(jb);
-		
 		add("East",jb);
-//		
-//		add("West",new JPanel());
 		
 		
 		
@@ -83,8 +65,8 @@ class ShowInitialSettingFrame implements ActionListener {
 		
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {				
-				Integer val = ButterProperties.GetIntegerValByKey(PropKey.PUMP_NUM);
-				Application.showInitial(val);
+				Integer pumpNum = ButterProperties.GetIntegerValByKey(PropKey.PUMP_NUM);
+				Application.showInitial(pumpNum);
 
 			}
 		});

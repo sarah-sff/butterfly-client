@@ -13,12 +13,24 @@ import javax.swing.JPanel;
 import dto.DeviceAddress;
 import dto.DeviceData;
 import exception.IllegalDeviceAddrException;
-import servise.InstructionQueen;
 import servise.SerialService;
 import swingView.define.ButterLabel;
-
+/**
+ * 
+ * @Description 
+ * 版权所有：昌运电器公司
+ * 未经本公司许可，不得以任何方式复制或者使用本程序任何部分
+ * @author 粟
+ * @date 2016年6月20日 上午11:44:17 
+ * @version V1.0.0
+ */
 public class AddressPanel extends JPanel {
 	
+	
+	/** @Fields serialVersionUID: */
+	  	
+	private static final long serialVersionUID = 1L;
+
 	static JComboBox addrCombox = null;
 	
 	static LightBtn statusBtn = new LightBtn(Color.LIGHT_GRAY, 20);
@@ -62,7 +74,7 @@ public class AddressPanel extends JPanel {
 	}
 	
 	public static void linkOn() {
-		statusBtn.setBackground(new Color(30,144,255));
+		statusBtn.lightOn();
 		statusText.setText("通讯正常");
 	}
 
@@ -104,7 +116,6 @@ class PortComboxItemListener implements ItemListener {
 };
 
 class AddressComboxItemListener implements ItemListener {
-
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		int state = e.getStateChange();

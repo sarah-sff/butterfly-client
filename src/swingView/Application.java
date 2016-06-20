@@ -4,13 +4,28 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
+import dto.DeviceData;
 import servise.InstructionQueen;
 import servise.Stabler;
 import staticVal.PropKey;
 import swingView.define.ButterFrame;
 import utils.ButterProperties;
-
+/**
+ * 
+ * @Description 
+ * 版权所有：昌运电器公司
+ * 未经本公司许可，不得以任何方式复制或者使用本程序任何部分
+ * @author 粟
+ * @date 2016年6月20日 上午11:44:51 
+ * @version V1.0.0
+ */
 public class Application extends ButterFrame {
+	
+	
+	/** @Fields serialVersionUID: */
+	  	
+	private static final long serialVersionUID = 1L;
+	
 	
 	static InitialFrame initialFrame = null;
 	static Application mainFrame = null;
@@ -18,7 +33,7 @@ public class Application extends ButterFrame {
 	Panel panel = new Panel();
 
 	Application() {
-		super("butterfly-水泵控制桌面");
+		super(DeviceData.proName+"-水泵控制桌面");
 		initGUI();
 		
 		if(ButterProperties.GetIntegerValByKey(PropKey.PUMP_NUM) == 0){

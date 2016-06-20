@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -13,16 +14,30 @@ import javax.swing.SwingUtilities;
 import dto.DeviceData;
 import servise.InstructionQueen;
 import swingView.define.ButterButton;
-import swingView.define.WarningPanel;
 
+/**
+ * 
+ * @Description 
+ * 版权所有：昌运电器公司
+ * 未经本公司许可，不得以任何方式复制或者使用本程序任何部分
+ * @author 粟
+ * @date 2016年6月20日 上午11:45:10 
+ * @version V1.0.0
+ */
 public class ButtonPanel extends JPanel {
 
-	static JButton modeSwitchBtn = new ButterButton("手动/自动");
-	static JButton inspectBtn = new ButterButton("巡检");
-	static JButton pump1Btn = new ButterButton("泵1");
-	static JButton pump2Btn = new ButterButton("泵2");
-	static JButton setBtn = new ButterButton("设置");
-	static JButton warningBtn = new ButterButton("报警记录");
+	static JButton modeSwitchBtn = new ButterButton("手动/自动",new ImageIcon(ButtonPanel.class
+            .getResource("/images/switch.png")));
+	static JButton inspectBtn = new ButterButton("巡检",new ImageIcon(ButtonPanel.class
+            .getResource("/images/xunjian.png")));
+	static JButton pump1Btn = new ButterButton("泵1",new ImageIcon(ButtonPanel.class
+            .getResource("/images/pump.png")));
+	static JButton pump2Btn = new ButterButton("泵2",new ImageIcon(ButtonPanel.class
+            .getResource("/images/pump.png")));
+	static JButton setBtn = new ButterButton("设置",new ImageIcon(ButtonPanel.class
+            .getResource("/images/settingIcon.png")));
+	static JButton warningBtn = new ButterButton("报警记录",new ImageIcon(ButtonPanel.class
+            .getResource("/images/warning.png")));
 	// JButton saveBtn= new Button("保存/复位");
 
 	SettingFrame settFrame = new SettingFrame();
@@ -40,6 +55,8 @@ public class ButtonPanel extends JPanel {
 		setOpaque(false);
 
 		setBtn.addActionListener(new SetBtnListener(settFrame));
+		
+		
 		modeSwitchBtn.addActionListener(new ModeListener());
 		inspectBtn.addActionListener(new InspectListener());
 		pump1Btn.addActionListener(new Pump1Listener());
@@ -69,13 +86,10 @@ class ModeListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		// 自动换手动
 		if (DeviceData.selectedMode == 1) {
-			DeviceData.selectedMode = 0;
 			InstructionQueen.getInstance().addUrgent(new byte[] { DeviceData.getSelectedDeviceAddr(), 5, 0, 1, -1, 0 });
 		} else {
-			DeviceData.selectedMode = 1;
 			InstructionQueen.getInstance().addUrgent(new byte[] { DeviceData.getSelectedDeviceAddr(), 5, 0, 0, -1, 0 });
 		}
 	}
@@ -85,8 +99,6 @@ class InspectListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("点击了巡检");
 		InstructionQueen.getInstance().addUrgent(new byte[] { DeviceData.getSelectedDeviceAddr(), 5, 0, 4, -1, 0 });
 	}
 }
@@ -95,7 +107,6 @@ class Pump1Listener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("点击了泵1");
 		InstructionQueen.getInstance().addUrgent(new byte[] { DeviceData.getSelectedDeviceAddr(), 5, 0, 2, -1, 0 });
 	}
 }
@@ -104,7 +115,6 @@ class Pump2Listener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("点击了泵2");
 		InstructionQueen.getInstance().addUrgent(new byte[] { DeviceData.getSelectedDeviceAddr(), 5, 0, 3, -1, 0 });
 	}
 }

@@ -7,6 +7,15 @@ import swingView.NumberPanel;
 import swingView.StatusPanel;
 import utils.ByteUtil;
 
+/**
+ * 
+ * @Description 
+ * 版权所有：昌运电器公司
+ * 未经本公司许可，不得以任何方式复制或者使用本程序任何部分
+ * @author 粟
+ * @date 2016年6月20日 上午11:42:00 
+ * @version V1.0.0
+ */
 public class AnalyseService {
 	public static StringBuffer msg = new StringBuffer();
 	static int t = 0;
@@ -22,7 +31,11 @@ public class AnalyseService {
 		byte addr = message[0];
 
 		if (DeviceData.isCurrentAddr(addr)) {
-			LightPanel.updateStatus(message);
+			
+			byte[] b = ByteUtil.byteTo8BitArray(message[3]);
+			
+			DeviceData.selectedMode = b[0];
+			LightPanel.updateStatus(b);
 		}else{
 			
 		}

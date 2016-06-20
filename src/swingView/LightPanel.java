@@ -1,14 +1,18 @@
 package swingView;
 
-import java.awt.Color;
 import java.awt.GridLayout;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-
-import utils.ByteUtil;
-
+/**
+ * 
+ * @Description 
+ * 版权所有：昌运电器公司
+ * 未经本公司许可，不得以任何方式复制或者使用本程序任何部分
+ * @author 粟
+ * @date 2016年6月20日 上午11:45:43 
+ * @version V1.0.0
+ */
 public class LightPanel extends JPanel {
 	
 	static Light [] lights = {new Light("自动")
@@ -27,13 +31,8 @@ public class LightPanel extends JPanel {
 	
 	/**
 	 * 更新灯亮状态
-	 * 1表示第一盏灯（0000001）
-	 * 2表示第二盏两（0000010）
 	 */
-	public static void updateStatus(byte[] msg){
-		
-		byte[] b = ByteUtil.byteTo8BitArray(msg[3]);
-       
+	public static void updateStatus(byte[] b){
         for(int i = 0; i<b.length;i++){
         	if(b[i] == 1){
         		lights[i].lightOn();

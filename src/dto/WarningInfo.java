@@ -1,11 +1,17 @@
 package dto;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import logs.WarningLog;
 import utils.DateUtil;
-
+/**
+ * 
+ * @Description 
+ * 版权所有：昌运电器公司
+ * 未经本公司许可，不得以任何方式复制或者使用本程序任何部分
+ * @author 粟
+ * @date 2016年6月20日 上午11:40:28 
+ * @version V1.0.0
+ */
 public class WarningInfo {
 	
 	public int addr;

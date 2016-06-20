@@ -20,7 +20,7 @@
       		<DefaultRolloverStrategy>
 		        <Delete basePath="logs/warning/" maxDepth="1">
 		          <IfFileName glob="*.log" />
-		          <IfLastModified age="3d" />
+		          <IfLastModified age="30d" />
 		        </Delete>
 		    </DefaultRolloverStrategy>
         </RollingFile>
@@ -35,7 +35,7 @@
       		<DefaultRolloverStrategy>
 		        <Delete basePath="logs/warning/" maxDepth="1">
 		          <IfFileName glob="*.log" />
-		          <IfLastModified age="3d" />
+		          <IfLastModified age="30d" />
 		        </Delete>
 		    </DefaultRolloverStrategy>
         </RollingFile>

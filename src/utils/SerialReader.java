@@ -15,7 +15,15 @@ import java.util.TooManyListenersException;
 import javax.swing.JOptionPane;
 
 
-
+/**
+ * 
+ * @Description 
+ * 版权所有：昌运电器公司
+ * 未经本公司许可，不得以任何方式复制或者使用本程序任何部分
+ * @author 粟
+ * @date 2016年6月20日 上午11:48:49 
+ * @version V1.0.0
+ */
 public class SerialReader implements Runnable, SerialPortEventListener {
 
     // 端口读入数据事件触发后,等待n毫秒后再读取,以便让数据一次性读完
@@ -36,26 +44,7 @@ public class SerialReader implements Runnable, SerialPortEventListener {
     InputStream inputStream;
     OutputStream outputStream;
     HashMap serialParams;
-    //    Thread readThread;// 本来是static类型的
-    // 端口是否打开了
-    boolean isOpen = false;
-
-    /**
-     * 初始化端口操作的参数.
-     *
-     * @see
-     */
-    public SerialReader() {
-        isOpen = false;
-    }
-    
-    
-    /**
-     * 需要重新打开
-     */
-    public void needReOpen(){
-//    	isOpen = false;
-    }
+ 
 
     static String getPortTypeName(int portType) {
         switch (portType) {
@@ -74,21 +63,9 @@ public class SerialReader implements Runnable, SerialPortEventListener {
         }
     }
 
-    public boolean isOpen() {
-        return isOpen;
-    }
-
     
     public boolean open(HashMap params) {
         serialParams = params;
-//        if (isOpen) {
-////            close();
-//            // 重复利用端口，陈玩杰  todo 验证可靠性
-//            serialParams.clear();
-//            Thread readThread = new Thread(this);
-//            readThread.start();
-//            return true;
-//        }
         try {
             // 参数初始化
             int timeout = Integer.parseInt(serialParams.get(PARAMS_TIMEOUT).toString());
@@ -110,8 +87,6 @@ public class SerialReader implements Runnable, SerialPortEventListener {
                 serialPort.addEventListener(this);
                 serialPort.notifyOnDataAvailable(true);
                 serialPort.setSerialPortParams(rate, dataBits, stopBits, parity);
-
-                isOpen = true;
             }
         } catch (PortInUseException e) {
             e.printStackTrace();
@@ -179,11 +154,6 @@ public class SerialReader implements Runnable, SerialPortEventListener {
         }
         try {
         	if(outputStream != null){
-        		String data = "";
-                for (byte b : bytes) {
-                    data += Integer.valueOf(b);
-                }
-                System.out.println("指令发送中......，数据----->" + data);
                 outputStream.write(bytes); // 往串口发送数据，是双向通讯的。
                 outputStream.flush();
         	}
@@ -193,17 +163,14 @@ public class SerialReader implements Runnable, SerialPortEventListener {
     }
 
     public void close() {
-        if (isOpen) {
-            try {
-                System.out.println("串口即将关闭！");
-                serialPort.notifyOnDataAvailable(false);
-                serialPort.removeEventListener();
-                inputStream.close();
-                serialPort.close();
-                isOpen = false;
-            } catch (IOException ex) {
-                // "关闭串口失败";
-            }
+    	try {
+            System.out.println("串口即将关闭！");
+            serialPort.notifyOnDataAvailable(false);
+            serialPort.removeEventListener();
+            inputStream.close();
+            serialPort.close();
+        } catch (IOException ex) {
+            // "关闭串口失败";
         }
     }
 
@@ -249,8 +216,6 @@ public class SerialReader implements Runnable, SerialPortEventListener {
 
         byte[] temp = new byte[length];
         System.arraycopy(message, 0, temp, 0, length);
-
-//        SerialService.doAnalyse({1,2,3});
         SerialService.doAnalyse(temp);
 
         //收到响应之后从稳定监控列表里移除

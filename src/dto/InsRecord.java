@@ -1,8 +1,13 @@
 package dto;
 
 /**
- * 璁板綍鎸囦护鍙戦�鏃堕棿
- * Created by Administrator on 2016/4/29.
+ * 
+ * @Description 
+ * 版权所有：昌运电器公司
+ * 未经本公司许可，不得以任何方式复制或者使用本程序任何部分
+ * @author 粟
+ * @date 2016年6月20日 上午11:39:00 
+ * @version V1.0.0
  */
 public class InsRecord {
 
@@ -34,7 +39,7 @@ public class InsRecord {
     }
 
     /**
-     * 鍒ゆ柇鐩哥瓑锛堟寚浠ょ浉绛夊嵆鍙級
+     * 判断相等
      *
      * @param insRecord
      * @return
@@ -45,7 +50,7 @@ public class InsRecord {
     }
 
     /**
-     * 宸茬粡鍙戦�澶氫箙锛堟绉掞級
+     * 是否超时
      *
      * @return
      */

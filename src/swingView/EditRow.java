@@ -1,6 +1,5 @@
 package swingView;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -21,32 +20,40 @@ import dto.SettingValDto;
 import servise.InstructionQueen;
 import staticVal.SettingType;
 import swingView.define.ButterButton;
+import swingView.define.ButterLabel;
 import swingView.define.JNumberField;
 import utils.ByteUtil;
 
+/**
+ * 
+ * @Description 
+ * 版权所有：昌运电器公司
+ * 未经本公司许可，不得以任何方式复制或者使用本程序任何部分
+ * @author 粟
+ * @date 2016年6月20日 上午11:45:19 
+ * @version V1.0.0
+ */
 public class EditRow extends JPanel {
 	
-	JLabel label = new JLabel("");
-	
-	
+	//提示
+	JLabel label = new ButterLabel("");	
+	//编辑空间
 	JComponent editComponent;	
-	
+	//按钮
 	JButton btn = new ButterButton("修改");
-	int type;
 	
+	int type;	
 	SettingValDto settingItem;
 	
-	public EditRow(SettingValDto settingItem) {
-		
+	public EditRow(SettingValDto settingItem) {	
 		this.settingItem = settingItem;
-		setOpaque(false);
-		
 		this.type = settingItem.type;
-		setLayout(new FlowLayout() );
+		
+		setLayout(new FlowLayout());
+		setOpaque(false);
 		
 		label.setPreferredSize(new Dimension(100,20));
 		label.setText(settingItem.name);
-		label.setForeground(Color.white);
 		add(label);
 		
 		if(type == SettingType.textType){
@@ -68,11 +75,8 @@ public class EditRow extends JPanel {
 			combox.setEnabled(false);  
 			combox.setMaximumRowCount(5);  
 			combox.setPrototypeDisplayValue("1234567890123");
-			
 			editComponent= combox;
-			
 		}
-		
 		add(editComponent);
 		
 		btn.addActionListener(new ModifyBtnListener(editComponent,settingItem.index,settingItem.type));
@@ -113,15 +117,12 @@ public class EditRow extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			JButton b = (JButton) e.getSource();
 			b.setText("保存");
 			item.setEnabled(true);
 			
 			b.removeActionListener(this);
 			b.addActionListener(new SaveBtnListener(item,index,type));
-//			btn.setText("保存");
-			
 		}
 	}
 	

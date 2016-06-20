@@ -17,7 +17,13 @@ import java.util.List;
 import javax.comm.SerialPort;
 
 /**
- * Created by Administrator on 2016/4/21.
+ * 
+ * @Description 
+ * 版权所有：昌运电器公司
+ * 未经本公司许可，不得以任何方式复制或者使用本程序任何部分
+ * @author 粟
+ * @date 2016年6月20日 上午11:42:22 
+ * @version V1.0.0
  */
 public class SerialService {
 
@@ -26,8 +32,6 @@ public class SerialService {
 
 	public static void setPort(String portNameString) {
 		portName = portNameString;
-		sr.needReOpen();
-		
 		
 		SerialService observer = new SerialService();
 		observer.openPort();
@@ -63,8 +67,6 @@ public class SerialService {
 	 */
 	private static void send(byte[] message) {
 		SerialService observer = new SerialService();
-//		observer.openSerialPort(CRC16.addCRCChecker(message));
-		
 		observer.sendMsg(message);
 
 		// 记录发送时间
@@ -91,7 +93,6 @@ public class SerialService {
 		if (InstructionQueen.getInstance().size() <= 0) {
 			return;
 		}
-		// TODO: 16/5/1 这里需要设置这么大的间隙吗?
 		try {
 			Thread.sleep(DeviceData.request_period);
 		} catch (Exception e) {
@@ -114,12 +115,6 @@ public class SerialService {
 		byte addrCode = message[0];
 
 		DeviceData.connectionSucceed(addrCode);
-
-		System.out.println();
-		for (byte i : message) {
-			System.out.print(i + " ");
-		}
-		System.out.println();
 		// 数据长度校验
 		if (message.length < 3)
 			return;
@@ -175,11 +170,6 @@ public class SerialService {
 		params.put(SerialReader.PARAMS_DELAY, 100); // 端口数据准备时间 1秒
 		try {
 			sr.open(params);
-
-//			if (message != null && message.length != 0) {
-//				sr.start();
-//				sr.run(message);
-//			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();

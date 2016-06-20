@@ -1,13 +1,18 @@
 package swingView;
 
-import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-
-import utils.ByteUtil;
-
+/**
+ * 
+ * @Description 
+ * 版权所有：昌运电器公司
+ * 未经本公司许可，不得以任何方式复制或者使用本程序任何部分
+ * @author 粟
+ * @date 2016年6月20日 上午11:45:55 
+ * @version V1.0.0
+ */
 public class NumberPanel extends JPanel  {
 	
 	static NumberItem [] items = {new  NumberItem("电压（V）"),new  NumberItem("1泵电流（A）"),new  NumberItem("2泵电流（A）")};

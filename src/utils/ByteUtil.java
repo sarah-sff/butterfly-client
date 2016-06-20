@@ -4,12 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2016/4/26.
+ * 
+ * @Description 
+ * 版权所有：昌运电器公司
+ * 未经本公司许可，不得以任何方式复制或者使用本程序任何部分
+ * @author 粟
+ * @date 2016年6月20日 上午11:47:52 
+ * @version V1.0.0
  */
 public class ByteUtil {
 	
 	/**
-	 * 灏嗕袱涓瓧鑺傜殑byte杞垚int绫诲瀷
+	 * 
 	 *
 	 * @param high
 	 * @param low
@@ -40,8 +46,6 @@ public class ByteUtil {
 	}
 
 	/**
-	 * 灏嗚繛涓瓧鑺傜殑byte杞垚浜岃繘鍒跺瓧绗︿覆
-	 *
 	 * @param bytes
 	 * @return
 	 */
@@ -106,8 +110,6 @@ public class ByteUtil {
 	}
 
 	/**
-	 * 鏈夌鍙疯浆鏃犵鍙�
-	 * 
 	 * @param b
 	 * @return
 	 */
@@ -124,8 +126,6 @@ public class ByteUtil {
 	
 	
 	/**
-	 * 鏈夌鍙疯浆鏃犵鍙�
-	 * 
 	 * @param b
 	 * @return
 	 */
